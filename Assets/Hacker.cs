@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class Hacker : MonoBehaviour
 {
+    // Game Config: 
+        // do these into a Matrix...   
+    string[] levelOnePasswords = {"Ninja", "Shadow", "Money", "Power" };
+    string[] levelTwoPasswords = { "Harly", "Ominous", "Laugh", "Evil Genius" };
+    string[] levelThreePasswords = { "Hawk", "Green", "Space", "SuperMan" };
+
+    // Game Variables
     int level;
     string input;
+    int randomLvl = Random.Range(0, 5); // to randomize the password~!
+    
+    
+
     enum Screen {MainMenu, Password, Win }
     Screen currentScreen;
     // Start is called before the first frame update
@@ -38,13 +49,13 @@ public class Hacker : MonoBehaviour
             }
             else if( currentScreen == Screen.Password)
             {
+
             if (level == 1)
             {
-                print(input);
-                if ( input == "Ninja")
+                
+                if ( input == levelOnePasswords[randomLvl])
                 {
-                    Terminal.WriteLine("You're in, Good Job~!");
-                    Terminal.WriteLine("Write 'menu' to Return!");
+                    WinCondition();
                 }
                 else
                 {
@@ -54,14 +65,14 @@ public class Hacker : MonoBehaviour
             }
             else if (level == 2)
             {
-                if (input == "Harly" )
+                
+                if (input == levelTwoPasswords[randomLvl])
                 {
-                    Terminal.WriteLine("You're in, Good Job~!");
-                    Terminal.WriteLine("Write 'menu' to Return!");
+                    WinCondition();
                 }
                 else if( input.ToLower() == "batman")
                 {
-                    Terminal.WriteLine("I've been expecting ya! old freind~!");
+                    Terminal.WriteLine("I've been expecting ya old freind~!");
                     // need to do something speical here~!
 
                 }
@@ -73,10 +84,9 @@ public class Hacker : MonoBehaviour
             }
             else if (level == 3)
             {
-                if (input == "Hungry")
+                if (input == levelThreePasswords[randomLvl])
                 {
-                    Terminal.WriteLine("You're in, Good Job~!");
-                    Terminal.WriteLine("Write 'menu' to Return!");
+                    WinCondition();
                 }
                 
                 else
@@ -87,6 +97,41 @@ public class Hacker : MonoBehaviour
             }
         }
         }
+
+    void WinCondition()
+    {
+        currentScreen = Screen.Win;
+        Terminal.ClearScreen();
+
+       
+        ShowLvlReward();
+    }
+
+    void ShowLvlReward()
+    {
+        switch (level)
+        {
+            case 1:
+                Terminal.WriteLine("You thwrated their plans to kill you~!");
+                Terminal.WriteLine
+                    (@"
+
+                                 
+                    
+                    ");
+                break;
+
+            case 2:
+
+                break;
+
+            case 3:
+
+                break;
+        }
+        
+    }
+
     void MenuController (string input) // to choose what lvl to play ~!
     {
         if ( input == "1")
